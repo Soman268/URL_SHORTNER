@@ -3,7 +3,7 @@ import json
 import os.path
 
 app = Flask(__name__)
-app.secret_key = 'Enter Your Own Random Text'
+
 
 @app.route('/')
 def index():
@@ -30,15 +30,6 @@ def your_url():
 
 
 
-@app.route('/<string:code>')
-def redirect_to_url(code):
-    if os.path.exists('urls.json'):
-        with open('urls.json') as urls_file:
-            urls = json.load(urls_file)
-            if code in urls.keys():
-                if 'url' in urls[code].keys():
-                    return redirect(urls[code]['url'])
-    return abort(404)
 
 @app.errorhandler(404)
 def page_not_found(error):
